@@ -11,6 +11,7 @@ import { useUser } from "@clerk/nextjs"
 import { collection, orderBy, query } from "firebase/firestore"
 import { db } from "@/firebase"
 import { askQuestion } from "@/actions/askQuestion"
+import ChatMessage from "./ChatMessage"
 
 export type Message = {
    id?: string
@@ -26,6 +27,7 @@ function Chat({ id }: { id: string }) {
    const [input, setInput] = useState("")
    const [isPending, startTransition] = useTransition()
    const [messages, setMessages] = useState<Message[]>([])
+   const bottomOfChatRef = useRef<HTMLDivElement>(null)
 
    const [snapshot, loading, error] = useCollection(
       user && query(
@@ -35,11 +37,38 @@ function Chat({ id }: { id: string }) {
    )
 
    useEffect(() => {
+      bottomOfChatRef.current?.scrollIntoView({
+         behavior: "smooth"
+      })
+   }, [messages])
+
+   useEffect(() => {
       if (!snapshot) {
          return
       }
 
       console.log("Updated snapshot", snapshot.docs)
+
+      // Get second last message to check if the AI is thinking 
+      const lastMessage = messages.pop()
+
+      if (lastMessage?.role === "ai" && lastMessage.message === "Thinking...") {
+         // Return as this is a dummy placeholder message
+         return
+      }
+
+      const newMessages = snapshot.docs.map((doc) => {
+         const { role, message, createdAt } = doc.data()
+
+         return {
+            id: doc.id,
+            role,
+            message,
+            createdAt: createdAt.toDate()
+         }
+      })
+
+      setMessages(newMessages)
    }, [snapshot])
 
    async function handleSubmit(e: FormEvent) {
@@ -88,6 +117,31 @@ function Chat({ id }: { id: string }) {
          {/* Chat contents */}
          <div className="flex-1 w-full">
             {/* Chat messages */}
+
+            {loading ? (
+               <div className="flex items-center justify-center">
+                  <Loader2Icon className="animate-spin h-20 w-20 text-indigo-600" />
+               </div>
+            ) : (
+               <div>
+                  {messages.length === 0 && (
+                     <ChatMessage
+                        key={"placeholder"}
+                        message={{
+                           role: "ai",
+                           message: "Ask me anything about the document!",
+                           createdAt: new Date()
+                        }}
+                     />
+                  )}
+
+                  {messages.map((message, index) => (
+                     <ChatMessage key={index} message={message} />
+                  ))}
+
+                  <div ref={bottomOfChatRef} />
+               </div>
+            )}
          </div>
 
          <form
