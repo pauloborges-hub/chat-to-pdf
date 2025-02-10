@@ -123,7 +123,7 @@ function Chat({ id }: { id: string }) {
                   <Loader2Icon className="animate-spin h-20 w-20 text-indigo-600" />
                </div>
             ) : (
-               <div>
+               <div className="p-5">
                   {messages.length === 0 && (
                      <ChatMessage
                         key={"placeholder"}

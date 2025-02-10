@@ -3,7 +3,8 @@
 import { useUser } from "@clerk/nextjs"
 import { Message } from "./Chat"
 import Image from "next/image"
-import { BotIcon } from "lucide-react"
+import { BotIcon, Loader2Icon } from "lucide-react"
+import Markdown from "react-markdown"
 
 function ChatMessage({ message }: { message: Message }) {
    const isHuman = message.role === "human"
@@ -11,8 +12,8 @@ function ChatMessage({ message }: { message: Message }) {
 
    return (
       <div className={`chat ${isHuman ? "chat-end" : "chat-start"}`}>
-         <div className="chat-image-avatar">
-            <div>
+         <div className="chat-image avatar">
+            <div className="w-10 rounded-full">
                {isHuman ? (
                   user?.imageUrl && (
                      <Image
@@ -31,7 +32,13 @@ function ChatMessage({ message }: { message: Message }) {
             </div>
          </div>
 
-         <div></div>
+         <div className={`chat-bubble prose ${isHuman && "bg-indigo-600 text-white"}`}>
+            {message.message === "Thinking..." ? (
+               <Loader2Icon className="animate-spin h-5 w-5 text-white" />
+            ) : (
+               <Markdown>{message.message}</Markdown>
+            )}
+         </div>
       </div>
    )
 }
