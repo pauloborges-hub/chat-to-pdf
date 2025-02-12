@@ -27,7 +27,7 @@ function FileUploader() {
       } else {
          // toast...
       }
-   }, [])
+   }, [handleUpload])
 
    const statusIcons: {
       [key in StatusText]: JSX.Element

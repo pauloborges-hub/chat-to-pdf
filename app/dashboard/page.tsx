@@ -10,7 +10,6 @@ function Dashboard() {
          </h1>
 
          {/* Document */}
-
          <Documents />
       </div>
    )
