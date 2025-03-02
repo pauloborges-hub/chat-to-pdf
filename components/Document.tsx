@@ -16,14 +16,14 @@ function Document({ id, name, size, downloadUrl }: { id: string, name: string, s
 
    return (
       <div className="flex flex-col w-64 h-80 rounded-xl bg-white drop-shadow-md justify-between p-4 transition-all
-      transform hover:scale-105 hover:bg-indigo-600 hover:text-white cursor-pointer group">
+      transform hover:scale-105 hover:bg-orange-600 hover:text-white cursor-pointer group">
          <div
             className="flex-1"
             onClick={() => {
                router.push(`/dashboard/files/${id}`)
             }}>
             <p className="font-semibold line-clamp-2">{name}</p>
-            <p className="text-sm text-gray-500 group-hover:text-indigo-100">
+            <p className="text-sm text-gray-500 group-hover:text-orange-100">
                {byteSize(size).value} KB
             </p>
          </div>
@@ -50,7 +50,7 @@ function Document({ id, name, size, downloadUrl }: { id: string, name: string, s
             </Button>
             <Button variant="outline" asChild>
                <a href={downloadUrl} download>
-                  <DownloadCloud className="h-6 w-6 text-indigo-600" />
+                  <DownloadCloud className="h-6 w-6 text-orange-600" />
                </a>
             </Button>
          </div>

@@ -128,7 +128,7 @@ function Chat({ id }: { id: string }) {
 
             {loading ? (
                <div className="flex items-center justify-center">
-                  <Loader2Icon className="animate-spin h-20 w-20 text-indigo-600" />
+                  <Loader2Icon className="animate-spin h-20 w-20 text-orange-600" />
                </div>
             ) : (
                <div className="p-5">
@@ -154,7 +154,7 @@ function Chat({ id }: { id: string }) {
 
          <form
             onSubmit={handleSubmit}
-            className="flex sticky bottom-0 space-x-2 p-5 bg-indigo-600/75"
+            className="flex sticky bottom-0 space-x-2 p-5 bg-orange-600/75"
          >
             <Input
                placeholder="Ask a question..."
@@ -167,7 +167,7 @@ function Chat({ id }: { id: string }) {
                disabled={!input || isPending}
             >
                {isPending ? (
-                  <Loader2Icon className="animate-spin text-indigo-600" />
+                  <Loader2Icon className="animate-spin text-orange-600" />
                ) : (
                   "Ask"
                )}
