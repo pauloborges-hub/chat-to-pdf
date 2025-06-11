@@ -10,7 +10,6 @@ function PlaceholderDocument() {
    const router = useRouter()
 
    function handleClick() {
-      // Check if user is FREE tier, and check if they're over the file limit -> then push to upgrade page
       if (isOverFileLimit) {
          router.push("/dashboard/upgrade")
       } else {

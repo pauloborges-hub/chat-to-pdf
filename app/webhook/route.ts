@@ -54,7 +54,6 @@ export async function POST(req: NextRequest) {
             return new NextResponse("User not found", { status: 404 })
          }
 
-         // Update the user's subscription status
          await adminDb
             .collection("users")
             .doc(userDetails?.id)

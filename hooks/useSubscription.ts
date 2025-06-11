@@ -6,7 +6,6 @@ import { collection, doc } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { useCollection, useDocument } from "react-firebase-hooks/firestore"
 
-// Number of docs the user is allowed to have
 const PRO_LIMIT = 20
 const FREE_LIMIT = 2
 
@@ -15,7 +14,6 @@ function useSubscription() {
    const [isOverFileLimit, setIsOverFileLimit] = useState(false)
    const { user } = useUser()
 
-   // Listen to the User document
    const [snapshot, loading, error] = useDocument(
       user && doc(db, "users", user.id),
       {
@@ -23,7 +21,6 @@ function useSubscription() {
       }
    )
 
-   // Listen to the User files collection
    const [filesSnapshot, filesLoading] = useCollection(
       user && collection(db, "users", user?.id, "files")
    )

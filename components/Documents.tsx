@@ -32,10 +32,7 @@ async function Documents() {
                />
             )
          })}
-
-         {/* PlaceholderDocument */}
          <PlaceholderDocument />
-
       </div>
    )
 }

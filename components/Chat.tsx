@@ -3,9 +3,7 @@
 import { FormEvent, useEffect, useRef, useState, useTransition } from "react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-// import { askQuestion, Message } from "@/actions/askQuestion";  
 import { Loader2Icon } from "lucide-react"
-// import ChatMessage from "./ChatMessage";  
 import { useCollection } from "react-firebase-hooks/firestore"
 import { useUser } from "@clerk/nextjs"
 import { collection, orderBy, query } from "firebase/firestore"
@@ -20,7 +18,6 @@ export type Message = {
    message: string
    createdAt: Date
 }
-
 
 function Chat({ id }: { id: string }) {
    const { user } = useUser()
@@ -51,11 +48,9 @@ function Chat({ id }: { id: string }) {
 
       console.log("Updated snapshot", snapshot.docs)
 
-      // Get second last message to check if the AI is thinking 
       const lastMessage = messages.pop()
 
       if (lastMessage?.role === "ai" && lastMessage.message === "Thinking...") {
-         // Return as this is a dummy placeholder message
          return
       }
 
@@ -80,7 +75,6 @@ function Chat({ id }: { id: string }) {
 
       setInput("")
 
-      // Optimistic UI update
       setMessages((prev) => [
          ...prev,
          {

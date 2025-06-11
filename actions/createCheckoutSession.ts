@@ -13,7 +13,6 @@ export async function createCheckoutSession(userDetails: UserDetails) {
       throw new Error("User not found")
    }
 
-   // First check if the user already has a stripeCustomerId
    let stripeCustomerId
 
    const user = await adminDb
@@ -23,7 +22,6 @@ export async function createCheckoutSession(userDetails: UserDetails) {
    stripeCustomerId = user.data()?.stripeCustomerId
 
    if (!stripeCustomerId) {
-      // Create a new stripe customer
       const customer = await stripe.customers.create({
          email: userDetails.email,
          name: userDetails.name,

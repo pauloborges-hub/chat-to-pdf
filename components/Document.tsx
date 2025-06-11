@@ -8,7 +8,6 @@ import { useTransition } from "react"
 import { Button } from "./ui/button"
 import { deleteDocument } from "@/actions/deleteDocument"
 
-// {size} used to be from the type "string"
 function Document({ id, name, size, downloadUrl }: { id: string, name: string, size: number, downloadUrl: string }) {
    const router = useRouter()
    const [isDeleting, startTransaction] = useTransition()
@@ -36,7 +35,6 @@ function Document({ id, name, size, downloadUrl }: { id: string, name: string, s
                onClick={() => {
                   const prompt = window.confirm("Are you sure you want to delete this document?")
                   if(prompt) {
-                     // Delete document
                      startTransaction(async () => {
                         await deleteDocument(id)
                      })

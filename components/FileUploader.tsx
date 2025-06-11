@@ -9,7 +9,6 @@ import { useCallback, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 
 function FileUploader() {
-   // Custom hook useUpload()
    const { progress, status, fileId, handleUpload } = useUpload()
    const { isOverFileLimit, filesLoading } = useSubscription()
    const router = useRouter()
@@ -21,9 +20,6 @@ function FileUploader() {
    }, [fileId, router])
 
    const onDrop = useCallback(async (acceptedFiles: File[]) => {
-      // Do something with the files
-      console.log(acceptedFiles)
-
       const file = acceptedFiles[0]
       if (file) {
          if (!isOverFileLimit && !filesLoading) {
@@ -36,8 +32,7 @@ function FileUploader() {
             })
          }
       } else {
-         // do nothing
-         // toast...
+         // TODO: add toast
       }
    }, [handleUpload, isOverFileLimit, filesLoading])
 
@@ -57,7 +52,6 @@ function FileUploader() {
          <HammerIcon className="h-20 w-20 text-orange-600 animate-bounce" />
       )
    }
-
 
    const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept } =
       useDropzone({

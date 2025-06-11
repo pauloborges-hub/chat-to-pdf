@@ -8,14 +8,6 @@ import { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { Loader2Icon, RotateCw, ZoomInIcon, ZoomOutIcon } from "lucide-react"
 
-// We need to configure CORS
-// gsutil cors set cors.json gs://<app-name>.appspot.com
-// gsutil cors set cors.json gs://chat-to-pdf-paulo.appspot.com
-// go here >>> https://console.cloud.google.com/
-// create new file in editor calls cors.json
-// run >>> // gsutil cors set cors.json gs://chat-to-pdf-paulo.appspot.com
-// https://firebase.google.com/docs/storage/web/download-files#cors_configuration
-
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
 function PDFView({ url }: { url: string }) {
@@ -35,10 +27,6 @@ function PDFView({ url }: { url: string }) {
 
       fetchFile()
    }, [url])
-
-   // function onDocumentLoadSuccess() {
-
-   // }
 
    const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => {
       setNumPages(numPages)

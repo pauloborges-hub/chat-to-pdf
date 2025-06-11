@@ -31,7 +31,6 @@ function Header() {
                   </Link>
                </Button>
 
-               {/* Upgrade Button */}
                <UpgradeButton />
                <UserButton />
             </div>

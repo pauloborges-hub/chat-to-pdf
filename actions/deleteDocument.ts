@@ -11,7 +11,6 @@ export async function deleteDocument(docId: string) {
 
    const { userId } = await auth()
 
-   // Delete the document from the firestore database
    await adminDb
       .collection("users")
       .doc(userId!)
@@ -19,16 +18,13 @@ export async function deleteDocument(docId: string) {
       .doc(docId)
       .delete()
 
-   // Delete the document from the firebase storage
    await adminStorage
       .bucket(process.env.FIREBASE_STORAGE_BUCKET) // Update with .env variable
       .file(`users/${userId}/files/${docId}`)
       .delete()
 
-   // Delete all embeddings associated with the document
    const index = await pineconeClient.index(indexName)
    await index.namespace(docId).deleteAll()
 
-   // Revalidate the dashboard page to ensure the documents are up to date
    revalidatePath("/dashboard")
 }

@@ -33,7 +33,6 @@ function PricingPage() {
          const stripe = await getStripe()
 
          if (hasActiveMembership) {
-            // Create stripe portal...
             const stripePortalUrl = await createStripePortal()
             return router.push(stripePortalUrl)
          }

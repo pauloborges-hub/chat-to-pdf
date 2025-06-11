@@ -29,8 +29,6 @@ function useUpload() {
    async function handleUpload(file: File) {
       if (!file || !user) return
 
-      // FREE/PRO limitations...
-
       const fileIdToUploadTo = uuidv4() // Generate a unique ID for the file
 
       const storageRef = ref(
@@ -49,6 +47,7 @@ function useUpload() {
       },
          (error) => {
             console.error("Error uploading file", error)
+            // TODO: add toast for error
          }, async () => {
             setStatus(StatusText.UPLOADED)
 
@@ -66,7 +65,6 @@ function useUpload() {
 
             setStatus(StatusText.GENERATING)
             
-            // Generate AI Embeddings
             await generateEmbeddings(fileIdToUploadTo)
 
             setFileId(fileIdToUploadTo)

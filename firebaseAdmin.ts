@@ -2,7 +2,6 @@ import { initializeApp, getApps, App, getApp, cert } from "firebase-admin/app"
 import { getFirestore } from "firebase-admin/firestore"
 import { getStorage } from "firebase-admin/storage"
 
-// Imports the firebase keys for access
 const serviceKey = require("@/service_key.json")
 
 let app: App

@@ -15,7 +15,6 @@ export async function createStripePortal() {
       throw new Error("User not found")
    }
 
-   // Get the customer ID from firebase
    const user = await adminDb
       .collection("users")
       .doc(userId)
